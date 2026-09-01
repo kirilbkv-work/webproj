@@ -1,16 +1,114 @@
-# frontend
+# Digital Clothing Store
 
-A new Flutter project.
+Прототип пользовательского интерфейса цифрового магазина одежды —
+годовой проект по курсу Web Programming.
 
-## Getting Started
+Реального backend нет: вся логика данных смоделирована через модели Dart,
+репозитории и BLoC.
 
-This project is a starting point for a Flutter application.
+## Стек
 
-A few resources to get you started if this is your first Flutter project:
+- **Flutter 3.32 / Dart 3.8**
+- **flutter_bloc** — управление состоянием
+- **go_router** — навигация с параметрами маршрута и redirect-гардами
+- **shared_preferences** — сохранение состояния между запусками
+- **intl** — форматирование цен и дат
+- **google_fonts** — Playfair Display + Space Grotesk
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Внешних UI-библиотек нет, вся вёрстка своя.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Запуск
+
+```bash
+flutter pub get
+flutter run -d chrome
+```
+
+Сборка веб-версии:
+
+```bash
+flutter build web --release
+```
+
+## Демонстрационный аккаунт
+
+| Логин      | Пароль     |
+| ---------- | ---------- |
+| `customer` | `customer` |
+
+На экране входа есть кнопка **Fill in**, подставляющая эти данные.
+Пункт меню аккаунта **Restore demo data** возвращает каталог, заказы
+и отзывы к исходному состоянию.
+
+## Архитектура
+
+Слоистая feature-first структура. Поток данных однонаправленный:
+репозиторий → поток → BLoC → состояние → виджет → событие → репозиторий.
+
+```
+lib/
+  core/
+    models/       — модели предметной области (Item, Order, Review,
+                    UserProfile, SearchQuery, CartLine/CartTotals)
+    search/       — чистые функции поиска и сортировки каталога
+    theme/        — палитра (ThemeExtension) и тема приложения
+    utils/        — форматирование, генерация идентификаторов
+  data/
+    seed/         — предопределённый набор: 16 товаров, 5 покупателей,
+                    15 отзывов, 4 стартовых заказа
+    services/     — обёртка над локальным хранилищем и ValueStore
+    repositories/ — симуляция backend: чтение, добавление, изменение
+                    и удаление данных
+  application/    — BLoC: auth, catalog, orders, reviews, item_details
+  features/       — экраны и диалоги
+  app/            — маршрутизация и корень приложения
+```
+
+**Почему так.** Репозитории — единственный источник правды; каждый
+отдаёт `Stream` текущего состояния через `ValueStore`. BLoC подписывается
+на нужные потоки и пересобирает своё состояние: например, `OrdersBloc`
+слушает заказы, каталог и сессию сразу, потому что состав корзины зависит
+от всех трёх. Правила, заданные заданием (что разрешено в каком статусе),
+живут в `OrderRepository`, поэтому BLoC остаётся тонким.
+
+## Как требования задания закрыты в коде
+
+| Требование                                                     | Где реализовано                                                   |
+| -------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Минимум 10 предопределённых товаров                             | `data/seed/seed_data.dart` — 16 товаров                             |
+| Атрибуты товара (название, тип, размер, производитель, дата, цена, отзывы) | `core/models/item.dart`, экран `features/item`             |
+| Поиск по каждому критерию **по отдельности**                    | `core/search/item_search.dart` + переключатель критериев в каталоге  |
+| Ручной просмотр каталога                                        | Постраничная сетка в `features/catalog`                             |
+| Резервирование + уведомление                                    | `OrderRepository.reserve()` → `OrdersBloc` → SnackBar в `AppShell`   |
+| Order Cart с автоматическим подсчётом суммы                     | `CartTotals.from()`, экран `features/cart`                          |
+| Статусы `arrived` / `in progress` / `canceled`                  | `core/models/order.dart`                                            |
+| Удаление заказа только в статусе `arrived`                      | `OrderStatus.canDelete`, проверка в UI и в `OrderRepository.remove()` |
+| Изменение заказа в статусах `in progress` / `canceled`          | `OrderStatus.canEdit`, `OrderRepository.update()`                    |
+| Оценка только своих заказов в статусе `arrived`                 | `OrderStatus.canRate`, `OrderRepository.rate()`                      |
+| Отзывы от покупателей, которые заказывали товар                 | Оценка заказа публикуется как `Review` и попадает на карточку товара |
+| Доступ без авторизации: каталог и отзывы                        | Маршруты `/catalog`, `/catalog/:id`, `/reviews` без гарда            |
+| Авторизация для резервирования, корзины и заказов               | `redirect` в `app/router.dart`, проверка в `OrderRepository.reserve()` |
+| Регистрация со всеми данными профиля                            | `features/auth/register_page.dart`                                   |
+| Редактирование профиля                                          | `features/profile/profile_page.dart`                                 |
+| Операции чтения / добавления / изменения / удаления             | Все репозитории в `data/repositories`                                |
+
+## Экраны прототипа
+
+1. Каталог — просмотр и постраничное листание
+2. Каталог — поиск по выбранному критерию
+3. Карточка товара со всеми атрибутами
+4. Карточка товара — отзывы покупателей
+5. Диалог резервирования + уведомление
+6. Вход
+7. Регистрация
+8. Профиль покупателя
+9. Order Cart — список заказов и общая стоимость
+10. Диалог изменения данных заказа
+11. Диалог выставления оценки
+12. Подтверждение удаления заказа
+13. Все отзывы покупателей
+
+## Устройства
+
+Основной сценарий — ноутбук. Вёрстка адаптивная и корректно работает
+на планшете и телефоне (проверено на 375 × 812).
