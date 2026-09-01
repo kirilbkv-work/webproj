@@ -9,22 +9,22 @@ class ItemDetailsState extends Equatable {
     this.myOrders = const [],
   });
 
-  /// `null`, если товара с таким идентификатором нет в каталоге.
+  /// null when the id is not in the catalog
   final Item? item;
 
-  /// Отзывы покупателей, которые заказывали этот товар.
+  /// reviews from customers who ordered this item
   final List<Review> reviews;
   final ReviewStats stats;
 
-  /// Другие товары того же типа.
+  /// other items of the same type
   final List<Item> related;
 
-  /// Заказы текущего покупателя по этому товару.
+  /// current customer's orders for this item
   final List<Order> myOrders;
 
   bool get exists => item != null;
 
-  /// Распределение оценок 5→1 для гистограммы отзывов.
+  /// rating distribution from 5 to 1
   List<({int stars, int count, double fraction})> get ratingBreakdown {
     return [
       for (final stars in const [5, 4, 3, 2, 1])

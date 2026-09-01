@@ -9,7 +9,7 @@ import 'item_cover.dart';
 import 'rating_stars.dart';
 import 'ui_kit.dart';
 
-/// Карточка товара в каталоге: все атрибуты, требуемые заданием.
+/// catalog card with every attribute the assignment asks for
 class ItemCard extends StatelessWidget {
   const ItemCard({super.key, required this.item, required this.stats});
 

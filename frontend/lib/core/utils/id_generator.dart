@@ -1,6 +1,6 @@
 import 'dart:math';
 
-/// Генератор идентификаторов для записей, созданных во время сессии.
+/// ids for records created during the session
 abstract final class IdGenerator {
   static final Random _random = Random();
   static int _counter = 0;

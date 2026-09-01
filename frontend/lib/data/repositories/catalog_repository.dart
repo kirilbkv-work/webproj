@@ -4,8 +4,7 @@ import '../seed/seed_data.dart';
 import '../services/storage_service.dart';
 import '../services/value_store.dart';
 
-/// Симуляция backend-логики каталога: чтение, добавление, редактирование
-/// и удаление товаров.
+/// simulated catalog backend: read, add, edit, delete
 class CatalogRepository {
   CatalogRepository(this._storage)
     : _store = ValueStore<List<Item>>(
@@ -28,7 +27,7 @@ class CatalogRepository {
     return null;
   }
 
-  /// Товары того же типа, кроме самого товара.
+  /// other items of the same type
   List<Item> relatedTo(String id, {int limit = 3}) {
     final source = byId(id);
     if (source == null) return const [];

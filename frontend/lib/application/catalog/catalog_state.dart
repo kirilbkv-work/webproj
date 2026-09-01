@@ -1,6 +1,6 @@
 part of 'catalog_bloc.dart';
 
-/// Количество товаров на одной странице каталога.
+/// items per catalog page
 const int kCatalogPageSize = 8;
 
 class CatalogState extends Equatable {
@@ -13,10 +13,10 @@ class CatalogState extends Equatable {
     this.page = 1,
   });
 
-  /// Весь предопределённый набор товаров.
+  /// the whole predefined set
   final List<Item> items;
 
-  /// Товары, прошедшие поиск и сортировку.
+  /// items after search and sorting
   final List<Item> results;
 
   final Map<String, ReviewStats> statsByItem;
@@ -29,7 +29,7 @@ class CatalogState extends Equatable {
   int get pageCount =>
       results.isEmpty ? 1 : (results.length / kCatalogPageSize).ceil();
 
-  /// Текущая страница выдачи — «ручное» перелистывание каталога.
+  /// current page of results
   List<Item> get visibleResults {
     final safePage = page.clamp(1, pageCount);
     final start = (safePage - 1) * kCatalogPageSize;

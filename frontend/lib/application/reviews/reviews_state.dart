@@ -1,6 +1,6 @@
 part of 'reviews_bloc.dart';
 
-/// Отзыв вместе с товаром, к которому он относится.
+/// a review together with its item
 class ReviewRow extends Equatable {
   const ReviewRow({required this.review, required this.item});
 
@@ -21,13 +21,13 @@ class ReviewsState extends Equatable {
     this.ratingFilter,
   });
 
-  /// Отзывы после применения фильтров, свежие сверху.
+  /// filtered reviews, newest first
   final List<ReviewRow> rows;
 
-  /// Все товары — для выпадающего списка фильтра.
+  /// every item, for the filter dropdown
   final List<Item> items;
 
-  /// Общее количество отзывов в магазине (без фильтров).
+  /// unfiltered review count
   final int totalCount;
   final double averageRating;
 

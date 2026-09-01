@@ -14,10 +14,7 @@ import '../shared/widgets/ui_kit.dart';
 import 'widgets/edit_order_dialog.dart';
 import 'widgets/rate_order_dialog.dart';
 
-/// Order Cart — все зарезервированные товары покупателя.
-///
-/// Общая стоимость пересчитывается автоматически; набор доступных действий
-/// зависит от статуса заказа.
+/// order cart; available actions depend on the order status
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
@@ -441,7 +438,7 @@ class _RatingRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Задание требует показывать оценку только у доставленных заказов.
+    // the assignment shows ratings for arrived orders only
     if (!order.status.canRate) {
       return Text(
         'Rating becomes available once the order arrives',
@@ -469,8 +466,7 @@ class _RatingRow extends StatelessWidget {
   }
 }
 
-/// Демонстрационная смена статуса: позволяет показать сценарий
-/// «заказ приехал» без реального backend.
+/// prototype-only status change
 class _SimulationControls extends StatelessWidget {
   const _SimulationControls({required this.order});
 

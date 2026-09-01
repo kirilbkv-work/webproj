@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'item.dart';
 import 'order.dart';
 
-/// Строка корзины: заказ вместе с данными товара.
+/// an order together with its item
 class CartLine extends Equatable {
   const CartLine({required this.order, required this.item});
 
@@ -16,7 +16,7 @@ class CartLine extends Equatable {
   List<Object?> get props => [order, item];
 }
 
-/// Итоги по одному статусу заказа.
+/// totals for a single status
 class StatusTotals extends Equatable {
   const StatusTotals({required this.count, required this.total});
 
@@ -29,8 +29,7 @@ class StatusTotals extends Equatable {
   List<Object?> get props => [count, total];
 }
 
-/// Общая стоимость корзины. Пересчитывается автоматически при любом
-/// изменении состава заказов.
+/// cart totals, recomputed on every change
 class CartTotals extends Equatable {
   const CartTotals({
     required this.total,
@@ -50,7 +49,7 @@ class CartTotals extends Equatable {
   StatusTotals forStatus(OrderStatus status) =>
       byStatus[status] ?? const StatusTotals.empty();
 
-  /// Считает итоги по списку строк корзины.
+  /// sums up the cart lines
   factory CartTotals.from(List<CartLine> lines) {
     var total = 0.0;
     var itemCount = 0;

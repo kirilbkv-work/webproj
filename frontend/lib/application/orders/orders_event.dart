@@ -7,7 +7,7 @@ sealed class OrdersEvent extends Equatable {
   List<Object?> get props => const [];
 }
 
-/// Фильтр корзины по статусу заказа. `null` — показать все заказы.
+/// null shows every order
 class OrdersFilterChanged extends OrdersEvent {
   const OrdersFilterChanged(this.status);
 
@@ -17,7 +17,7 @@ class OrdersFilterChanged extends OrdersEvent {
   List<Object?> get props => [status];
 }
 
-/// Резервирование товара из карточки товара.
+/// reserve an item
 class OrderReserved extends OrdersEvent {
   const OrderReserved({required this.itemId, required this.draft});
 
@@ -28,7 +28,7 @@ class OrderReserved extends OrdersEvent {
   List<Object?> get props => [itemId, draft];
 }
 
-/// Изменение данных заказа — статусы «in progress» и «canceled».
+/// allowed for in progress and canceled orders
 class OrderEdited extends OrdersEvent {
   const OrderEdited({required this.orderId, required this.draft});
 
@@ -39,7 +39,7 @@ class OrderEdited extends OrdersEvent {
   List<Object?> get props => [orderId, draft];
 }
 
-/// Удаление заказа из корзины — только статус «arrived».
+/// allowed for arrived orders only
 class OrderDeleted extends OrdersEvent {
   const OrderDeleted(this.orderId);
 
@@ -49,7 +49,7 @@ class OrderDeleted extends OrdersEvent {
   List<Object?> get props => [orderId];
 }
 
-/// Выставление оценки — только собственный заказ в статусе «arrived».
+/// own arrived orders only
 class OrderRated extends OrdersEvent {
   const OrderRated({
     required this.orderId,
@@ -65,7 +65,7 @@ class OrderRated extends OrdersEvent {
   List<Object?> get props => [orderId, rating, comment];
 }
 
-/// Демонстрационная смена статуса заказа.
+/// prototype-only status change
 class OrderStatusSimulated extends OrdersEvent {
   const OrderStatusSimulated({required this.orderId, required this.status});
 
@@ -76,7 +76,7 @@ class OrderStatusSimulated extends OrdersEvent {
   List<Object?> get props => [orderId, status];
 }
 
-/// Внутреннее событие: изменились заказы, каталог или сессия.
+/// internal: orders, catalog or session changed
 class _OrdersDataChanged extends OrdersEvent {
   const _OrdersDataChanged();
 }

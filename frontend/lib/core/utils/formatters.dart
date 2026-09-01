@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-/// Единое форматирование цен и дат во всём приложении.
+/// shared price and date formatting
 abstract final class Formatters {
   static final NumberFormat _money = NumberFormat.currency(
     locale: 'en_US',

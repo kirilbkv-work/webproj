@@ -11,8 +11,7 @@ import '../../core/utils/formatters.dart';
 import '../../data/repositories/review_repository.dart';
 import '../shared/widgets/ui_kit.dart';
 
-/// Профиль покупателя: просмотр и правка всех данных регистрации,
-/// смена пароля и сводка по заказам и отзывам.
+/// profile: view and edit registration data, password and stats
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -20,8 +19,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-/// Панель, которой принадлежит текущая ошибка формы:
-/// [AuthState.formError] одна на весь блок, а плашек — две.
+/// which panel owns the current form error
 enum _ErrorOwner { none, profile, password }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -43,18 +41,17 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Set<ClothingType> _favorites = <ClothingType>{};
 
-  /// Профиль, из которого заполнены поля, — база для сравнения.
+  /// profile the fields were filled from
   UserProfile? _source;
 
   bool _dirty = false;
 
-  /// Заглушка на время программного заполнения полей,
-  /// чтобы слушатели контроллеров не пересчитывали признак изменений.
+  /// suppresses change tracking while fields are filled programmatically
   bool _applying = false;
 
   _ErrorOwner _errorOwner = _ErrorOwner.none;
 
-  /// Ждём результат смены пароля: успех виден по новому id сообщения.
+  /// waiting for the password change result
   bool _passwordPending = false;
   int? _passwordBaseMessageId;
 
@@ -76,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
     for (final controller in _profileControllers) {
       controller.addListener(_handleFieldChanged);
     }
-    // Ошибка могла остаться от формы входа или регистрации.
+    // drop an error left over from another form
     bloc.add(const AuthErrorCleared());
   }
 
@@ -156,7 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
           email: _email.text.trim(),
           phone: _phone.text.trim(),
           address: _address.text.trim(),
-          // Порядок enum, а не порядок кликов.
+          // enum order, not click order
           favoriteTypes: ClothingType.values
               .where(_favorites.contains)
               .toList(),
@@ -649,7 +646,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-/// Одна цифра сводки в карточке профиля.
+/// a single profile stat
 class _Metric extends StatelessWidget {
   const _Metric(this.label, this.value);
 
@@ -677,7 +674,7 @@ class _Metric extends StatelessWidget {
   }
 }
 
-/// Поле формы с подписью сверху и необязательной сноской.
+/// labelled form field with an optional hint
 class _LabeledField extends StatelessWidget {
   const _LabeledField({
     required this.label,

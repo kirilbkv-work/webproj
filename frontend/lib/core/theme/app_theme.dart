@@ -3,10 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app_palette.dart';
 
-/// Тема приложения: сдержанная «бутиковая» палитра, крупная антиква
-/// в заголовках и гротеск в интерфейсе.
+/// app theme: cream palette, serif headings, grotesk interface
 abstract final class AppTheme {
-  /// Ширина контентной колонки на широких экранах.
+  /// content column width
   static const double contentMaxWidth = 1180;
 
   static const double radiusSm = 8;

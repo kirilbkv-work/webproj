@@ -1,9 +1,6 @@
 import 'dart:async';
 
-/// Наблюдаемое значение: хранит текущее состояние и вещает изменения.
-///
-/// Новый подписчик сразу получает актуальное значение, поэтому BLoC может
-/// подписаться в любой момент и не пропустить данные.
+/// observable value; a new listener gets the current state at once
 class ValueStore<T> {
   ValueStore(this._value);
 

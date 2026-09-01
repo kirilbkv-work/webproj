@@ -2,11 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'clothing.dart';
 
-/// Товар каталога.
-///
-/// Набор атрибутов соответствует заданию: название, тип, размер,
-/// производитель, дата выпуска и цена. Отзывы хранятся отдельно
-/// и связываются с товаром по [id].
+/// catalog item; reviews are stored separately and linked by id
 class Item extends Equatable {
   const Item({
     required this.id,
@@ -29,10 +25,10 @@ class Item extends Equatable {
   final String description;
   final ClothingType type;
 
-  /// Размер, под которым товар представлен в каталоге.
+  /// size the item is listed under
   final ClothingSize size;
 
-  /// Размеры, доступные при резервировании. Всегда содержит [size].
+  /// sizes offered on reservation, always contains [size]
   final List<ClothingSize> availableSizes;
 
   final String manufacturer;
@@ -41,7 +37,7 @@ class Item extends Equatable {
   final String material;
   final String colorway;
 
-  /// Пара цветов (ARGB) для генеративной обложки товара.
+  /// color pair for the generated cover
   final int coverFrom;
   final int coverTo;
 
@@ -74,7 +70,7 @@ class Item extends Equatable {
     );
   }
 
-  /// Монограмма для обложки: первые буквы двух первых слов названия.
+  /// initials of the first two words
   String get monogram => name
       .split(' ')
       .where((word) => word.isNotEmpty)

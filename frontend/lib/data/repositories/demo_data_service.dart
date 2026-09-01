@@ -4,7 +4,7 @@ import 'catalog_repository.dart';
 import 'order_repository.dart';
 import 'review_repository.dart';
 
-/// Возврат прототипа к предопределённому набору данных.
+/// restores the predefined data set
 class DemoDataService {
   DemoDataService({
     required StorageService storage,

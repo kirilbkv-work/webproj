@@ -52,12 +52,12 @@ class AuthPasswordSubmitted extends AuthEvent {
   List<Object?> get props => [currentPassword, newPassword];
 }
 
-/// Сброс инлайновой ошибки формы, например при открытии страницы заново.
+/// clears the inline form error
 class AuthErrorCleared extends AuthEvent {
   const AuthErrorCleared();
 }
 
-/// Внутреннее событие: репозиторий сообщил об изменении данных.
+/// internal: repository data changed
 class _AuthDataChanged extends AuthEvent {
   const _AuthDataChanged(this.data);
 

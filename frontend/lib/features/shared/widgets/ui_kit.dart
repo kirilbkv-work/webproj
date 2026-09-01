@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_palette.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Ограничивает контент по ширине и задаёт единые отступы страницы.
+/// constrains page content width and padding
 class PageBody extends StatelessWidget {
   const PageBody({
     super.key,
@@ -29,7 +29,7 @@ class PageBody extends StatelessWidget {
   }
 }
 
-/// Карточка-панель с рамкой — базовый контейнер разделов.
+/// bordered section container
 class Panel extends StatelessWidget {
   const Panel({
     super.key,
@@ -41,7 +41,7 @@ class Panel extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry padding;
 
-  /// Приглушённый вариант без белой заливки.
+  /// muted variant without the white fill
   final bool flat;
 
   @override
@@ -59,7 +59,7 @@ class Panel extends StatelessWidget {
   }
 }
 
-/// Мелкий заголовок над крупным — «THE COLLECTION».
+/// small caps label above a heading
 class Eyebrow extends StatelessWidget {
   const Eyebrow(this.text, {super.key});
 
@@ -79,7 +79,7 @@ class Eyebrow extends StatelessWidget {
   }
 }
 
-/// Нейтральная метка (тип товара, служебная подпись).
+/// neutral label
 class Tag extends StatelessWidget {
   const Tag(this.text, {super.key});
 
@@ -108,7 +108,7 @@ class Tag extends StatelessWidget {
   }
 }
 
-/// Переключаемая «таблетка» — критерии поиска, фильтры статусов.
+/// toggleable pill used for criteria and filters
 class SelectableChip extends StatelessWidget {
   const SelectableChip({
     super.key,
@@ -150,7 +150,7 @@ class SelectableChip extends StatelessWidget {
   }
 }
 
-/// Цветная информационная плашка.
+/// colored info banner
 class Notice extends StatelessWidget {
   const Notice({super.key, required this.text, this.tone = NoticeTone.neutral});
 
@@ -184,7 +184,7 @@ class Notice extends StatelessWidget {
 
 enum NoticeTone { neutral, info, success, error }
 
-/// Пара «подпись — значение» в сетке характеристик.
+/// label and value pair
 class SpecEntry {
   const SpecEntry(this.label, this.value);
 
@@ -192,7 +192,7 @@ class SpecEntry {
   final String value;
 }
 
-/// Сетка характеристик товара или заказа.
+/// spec grid for an item or an order
 class SpecGrid extends StatelessWidget {
   const SpecGrid({super.key, required this.entries, this.minColumnWidth = 140});
 
@@ -249,7 +249,7 @@ class SpecGrid extends StatelessWidget {
   }
 }
 
-/// Единое оформление пустых списков.
+/// shared empty list placeholder
 class EmptyState extends StatelessWidget {
   const EmptyState({
     super.key,

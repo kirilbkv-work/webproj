@@ -7,7 +7,7 @@ sealed class CatalogEvent extends Equatable {
   List<Object?> get props => const [];
 }
 
-/// Выбор критерия поиска. Критерии применяются по одному за раз.
+/// one criterion is active at a time
 class CatalogCriterionSelected extends CatalogEvent {
   const CatalogCriterionSelected(this.criterion);
 
@@ -17,7 +17,7 @@ class CatalogCriterionSelected extends CatalogEvent {
   List<Object?> get props => [criterion];
 }
 
-/// Изменение значения активного критерия.
+/// value of the active criterion changed
 class CatalogQueryChanged extends CatalogEvent {
   const CatalogQueryChanged(this.query);
 
@@ -49,7 +49,7 @@ class CatalogSearchCleared extends CatalogEvent {
   const CatalogSearchCleared();
 }
 
-/// Внутреннее событие: изменился каталог или набор отзывов.
+/// internal: catalog or reviews changed
 class _CatalogDataChanged extends CatalogEvent {
   const _CatalogDataChanged();
 }

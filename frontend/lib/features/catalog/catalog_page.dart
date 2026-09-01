@@ -10,10 +10,7 @@ import '../../core/utils/formatters.dart';
 import '../shared/widgets/item_card.dart';
 import '../shared/widgets/ui_kit.dart';
 
-/// Каталог товаров.
-///
-/// Доступен без авторизации: покупатель может листать предопределённый
-/// набор вручную либо искать по одному критерию за раз.
+/// catalog; open to guests, browsable page by page or searchable
 class CatalogPage extends StatefulWidget {
   const CatalogPage({super.key});
 
@@ -140,7 +137,7 @@ class _Header extends StatelessWidget {
   }
 }
 
-/// Подборка по любимым типам одежды из профиля покупателя.
+/// picks based on the profile's favourite types
 class _Recommended extends StatelessWidget {
   const _Recommended();
 
@@ -350,8 +347,7 @@ class _SearchPanel extends StatelessWidget {
   }
 }
 
-/// Поля активного критерия. Показывается ровно один набор — задание
-/// требует применять критерии по отдельности.
+/// fields of the active criterion, one set at a time
 class _CriterionFields extends StatelessWidget {
   const _CriterionFields({
     required this.query,
@@ -739,7 +735,7 @@ class _ResultsBar extends StatelessWidget {
     );
   }
 
-  /// Человекочитаемое описание активного критерия.
+  /// human readable summary of the active criterion
   static String _summary(SearchQuery query) {
     return switch (query.criterion) {
       SearchCriterion.name => 'Name contains “${query.name.trim()}”',
@@ -791,7 +787,7 @@ class _ResultsGrid extends StatelessWidget {
   }
 }
 
-/// Постраничное «ручное» листание каталога.
+/// manual page by page browsing
 class _Pager extends StatelessWidget {
   const _Pager({required this.state});
 

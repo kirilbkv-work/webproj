@@ -1,10 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-/// Одноразовое сообщение пользователю (уведомление о резервировании,
-/// подтверждение сохранения, сообщение об ошибке).
-///
-/// Хранится в состоянии BLoC вместе с уникальным [id], чтобы `BlocListener`
-/// показывал даже два одинаковых сообщения подряд.
+/// one-shot user message; the id makes repeated texts distinct
 class AppMessage extends Equatable {
   const AppMessage({
     required this.id,
@@ -20,7 +16,7 @@ class AppMessage extends Equatable {
   final String body;
   final bool isError;
 
-  /// Кнопка перехода внутри уведомления, например «Open cart».
+  /// optional navigation action
   final String? actionLabel;
   final String? actionRoute;
 
@@ -28,7 +24,7 @@ class AppMessage extends Equatable {
   List<Object?> get props => [id, title, body, isError, actionLabel, actionRoute];
 }
 
-/// Источник возрастающих идентификаторов сообщений.
+/// increasing message ids
 class MessageIds {
   MessageIds._();
 

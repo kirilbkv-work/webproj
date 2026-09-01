@@ -4,10 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/models/models.dart';
 import '../../../core/theme/app_palette.dart';
 
-/// Показывает одноразовое сообщение BLoC как SnackBar.
-///
-/// Через этот механизм покупатель получает уведомление о резервировании,
-/// которого требует задание.
+/// shows a bloc message as a snack bar, including the reservation notice
 void showAppMessage(BuildContext context, AppMessage message) {
   final palette = context.palette;
   final messenger = ScaffoldMessenger.of(context);

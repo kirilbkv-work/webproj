@@ -9,18 +9,15 @@ import '../../core/utils/formatters.dart';
 import '../shared/widgets/rating_stars.dart';
 import '../shared/widgets/ui_kit.dart';
 
-/// Порог перехода макета в одну колонку.
+/// breakpoint for the single column layout
 const double _narrowWidth = 760;
 
-/// Минимальная ширина колонки в сетке отзывов.
+/// minimum column width in the review grid
 const double _minCardWidth = 320;
 
 const List<int> _ratingFilters = [5, 4, 3, 2, 1];
 
-/// Все отзывы покупателей: сводная оценка, фильтры и сетка карточек.
-///
-/// Страница открыта без авторизации — задание разрешает читать чужие
-/// отзывы всем посетителям.
+/// all customer reviews; open to guests
 class ReviewsPage extends StatelessWidget {
   const ReviewsPage({super.key});
 
@@ -60,7 +57,7 @@ void _clearFilters(BuildContext context) {
   context.read<ReviewsBloc>().add(const ReviewsFiltersCleared());
 }
 
-/// Заголовок страницы и сводка по всем отзывам.
+/// page heading and the overall summary
 class _Head extends StatelessWidget {
   const _Head({required this.state});
 
@@ -113,7 +110,7 @@ class _Head extends StatelessWidget {
   }
 }
 
-/// Средняя оценка магазина и общее число отзывов.
+/// store average and total review count
 class _Overview extends StatelessWidget {
   const _Overview({required this.state});
 
@@ -135,8 +132,7 @@ class _Overview extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // На узком экране строка звёзд с числами не помещается
-                // целиком — сжимаем её вместо переполнения.
+                // the star row does not fit on narrow screens, scale it down
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerLeft,
@@ -159,7 +155,7 @@ class _Overview extends StatelessWidget {
   }
 }
 
-/// Фильтры по товару и оценке.
+/// item and rating filters
 class _FiltersPanel extends StatelessWidget {
   const _FiltersPanel({required this.state});
 
@@ -252,7 +248,7 @@ class _FiltersPanel extends StatelessWidget {
   }
 }
 
-/// Подпись над полем фильтра.
+/// label above a filter
 class _Field extends StatelessWidget {
   const _Field({required this.label, required this.child});
 
@@ -280,7 +276,7 @@ class _Field extends StatelessWidget {
   }
 }
 
-/// Сетка карточек отзывов: на широком экране 2–3 колонки, на узком одна.
+/// review grid, two to three columns when wide
 class _ReviewGrid extends StatelessWidget {
   const _ReviewGrid({required this.rows});
 
@@ -314,7 +310,7 @@ class _ReviewGrid extends StatelessWidget {
   }
 }
 
-/// Один отзыв: автор, дата, оценка, товар и текст.
+/// one review card
 class _ReviewCard extends StatelessWidget {
   const _ReviewCard({required this.row});
 
@@ -376,7 +372,7 @@ class _ReviewCard extends StatelessWidget {
   }
 }
 
-/// Ссылка на карточку товара, к которому относится отзыв.
+/// link to the reviewed item
 class _ItemLink extends StatelessWidget {
   const _ItemLink({required this.item});
 

@@ -5,10 +5,7 @@ import '../../../core/theme/app_palette.dart';
 import '../../../core/utils/formatters.dart';
 import '../../shared/widgets/ui_kit.dart';
 
-/// Диалог резервирования товара.
-///
-/// Возвращает заполненный [OrderDraft] либо `null`, если покупатель отменил
-/// резервирование.
+/// reserves an item; returns an [OrderDraft] or null
 class ReserveDialog extends StatefulWidget {
   const ReserveDialog({
     super.key,
@@ -18,7 +15,7 @@ class ReserveDialog extends StatefulWidget {
 
   final Item item;
 
-  /// Адрес из профиля — подставляется как значение по умолчанию.
+  /// default address taken from the profile
   final String defaultAddress;
 
   static Future<OrderDraft?> show(

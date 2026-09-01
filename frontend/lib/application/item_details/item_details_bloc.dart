@@ -12,9 +12,7 @@ import '../../data/repositories/review_repository.dart';
 part 'item_details_event.dart';
 part 'item_details_state.dart';
 
-/// Карточка одного товара: атрибуты, отзывы и собственные заказы покупателя.
-///
-/// Создаётся на время жизни страницы вместе с идентификатором товара.
+/// one item: attributes, reviews and the customer's own orders
 class ItemDetailsBloc extends Bloc<ItemDetailsEvent, ItemDetailsState> {
   ItemDetailsBloc({
     required String itemId,

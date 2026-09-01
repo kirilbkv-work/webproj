@@ -6,11 +6,11 @@ import '../../application/auth/auth_bloc.dart';
 import '../../core/theme/app_palette.dart';
 import '../shared/widgets/ui_kit.dart';
 
-/// Вход в систему. Открывает резервирование, корзину и профиль.
+/// sign in; unlocks reservations, the cart and the profile
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, this.returnUrl});
 
-  /// Адрес, на который нужно вернуться после успешного входа.
+  /// where to go after a successful sign in
   final String? returnUrl;
 
   @override
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    // Ошибка могла остаться от прошлой попытки входа — открываем форму чистой.
+    // drop an error left over from a previous attempt
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         context.read<AuthBloc>().add(const AuthErrorCleared());
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.text = 'customer';
   }
 
-  /// Пустая строка в returnUrl равнозначна её отсутствию.
+  /// an empty returnUrl counts as absent
   String? get _returnUrl {
     final value = widget.returnUrl;
     return (value == null || value.isEmpty) ? null : value;
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
     final palette = context.palette;
 
     return BlocConsumer<AuthBloc, AuthState>(
-      // Нужен именно переход «гость → авторизован», а не любое изменение данных.
+      // only the guest to signed-in transition should navigate
       listenWhen: (previous, current) =>
           !previous.isAuthenticated && current.isAuthenticated,
       listener: (context, state) => context.go(_returnUrl ?? '/catalog'),
@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-/// Подпись над полем ввода — единый вид для всех полей формы.
+/// label above an input
 class _Field extends StatelessWidget {
   const _Field({required this.label, required this.child});
 

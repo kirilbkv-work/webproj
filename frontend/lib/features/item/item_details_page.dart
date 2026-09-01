@@ -15,8 +15,7 @@ import '../shared/widgets/status_badge.dart';
 import '../shared/widgets/ui_kit.dart';
 import 'widgets/reserve_dialog.dart';
 
-/// Карточка товара: все атрибуты предмета, отзывы покупателей,
-/// которые его заказывали, и диалог резервирования.
+/// item page: attributes, reviews and the reserve dialog
 class ItemDetailsPage extends StatelessWidget {
   const ItemDetailsPage({super.key});
 
@@ -398,7 +397,7 @@ class _ReviewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // Карточки отзывов должны занимать всю ширину колонки.
+      // review cards fill the column width
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (final review in reviews)

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'clothing.dart';
 
-/// Профиль покупателя — единственный тип пользователя в приложении.
+/// customer profile, the only user type
 class UserProfile extends Equatable {
   const UserProfile({
     required this.id,
@@ -26,7 +26,7 @@ class UserProfile extends Equatable {
   final List<ClothingType> favoriteTypes;
   final String username;
 
-  /// Только для прототипа: пароль хранится в открытом виде.
+  /// prototype only, stored in plain text
   final String password;
   final DateTime memberSince;
 
@@ -105,7 +105,7 @@ class UserProfile extends Equatable {
   ];
 }
 
-/// Данные, которые пользователь заполняет при регистрации.
+/// full profile collected at registration
 class RegistrationData extends Equatable {
   const RegistrationData({
     required this.firstName,
@@ -140,7 +140,7 @@ class RegistrationData extends Equatable {
   ];
 }
 
-/// Редактируемая часть профиля (без пароля).
+/// editable profile fields
 class ProfileDraft extends Equatable {
   const ProfileDraft({
     required this.firstName,

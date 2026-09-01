@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/models/models.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Обложка товара.
-///
-/// Прототип не использует внешние изображения, поэтому обложка строится
-/// из фирменных цветов товара и его монограммы.
+/// generated cover from the item colors and monogram, no external images
 class ItemCover extends StatelessWidget {
   const ItemCover({super.key, required this.item, this.aspectRatio = 4 / 3});
 

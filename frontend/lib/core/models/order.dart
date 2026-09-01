@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'clothing.dart';
 
-/// Статус заказа и набор действий, разрешённых заданием для каждого статуса.
+/// order status and the actions allowed in it
 enum OrderStatus {
   inProgress('in progress', 'In progress'),
   arrived('arrived', 'Arrived'),
@@ -13,14 +13,14 @@ enum OrderStatus {
   final String wireName;
   final String label;
 
-  /// Удалить заказ из корзины можно только после доставки.
+  /// only arrived orders can be deleted
   bool get canDelete => this == OrderStatus.arrived;
 
-  /// Изменять данные заказа можно, пока он не доставлен.
+  /// details stay editable until delivery
   bool get canEdit =>
       this == OrderStatus.inProgress || this == OrderStatus.canceled;
 
-  /// Оценка доступна только для доставленных заказов.
+  /// only arrived orders can be rated
   bool get canRate => this == OrderStatus.arrived;
 
   static OrderStatus fromWire(String value) => OrderStatus.values.firstWhere(
@@ -29,9 +29,7 @@ enum OrderStatus {
   );
 }
 
-/// Заказ (резервирование) из Order Cart.
-///
-/// Данные товара не дублируются — они читаются из каталога по [itemId].
+/// a reservation in the order cart; item data is read from the catalog
 class Order extends Equatable {
   const Order({
     required this.id,
@@ -57,10 +55,10 @@ class Order extends Equatable {
   final String deliveryAddress;
   final String note;
 
-  /// Оценка от 1 до 5. Доступна только для статуса `arrived`.
+  /// 1 to 5, arrived orders only
   final int? rating;
 
-  /// Отзыв, порождённый оценкой этого заказа.
+  /// review created from this rating
   final String? reviewId;
 
   Order copyWith({
@@ -131,7 +129,7 @@ class Order extends Equatable {
   ];
 }
 
-/// Данные заказа, которые покупатель может задать или изменить.
+/// order fields the customer can set
 class OrderDraft extends Equatable {
   const OrderDraft({
     required this.size,
@@ -157,7 +155,7 @@ class OrderDraft extends Equatable {
     note: note ?? this.note,
   );
 
-  /// Проверка данных заказа. Возвращает текст ошибки или `null`.
+  /// returns an error text or null
   String? validate() {
     if (quantity < 1 || quantity > 10) {
       return 'Quantity must be a whole number between 1 and 10.';

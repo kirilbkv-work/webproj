@@ -5,10 +5,10 @@ class AuthState extends Equatable {
 
   final AuthData data;
 
-  /// Ошибка, показываемая прямо в форме (неверный пароль, занятый логин).
+  /// shown inline in the form
   final String? formError;
 
-  /// Одноразовое сообщение для SnackBar.
+  /// one-shot snack bar message
   final AppMessage? message;
 
   UserProfile? get user => data.currentUser;

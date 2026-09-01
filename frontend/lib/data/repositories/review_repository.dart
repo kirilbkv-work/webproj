@@ -4,7 +4,7 @@ import '../seed/seed_data.dart';
 import '../services/storage_service.dart';
 import '../services/value_store.dart';
 
-/// Симуляция backend-логики отзывов.
+/// simulated review backend
 class ReviewRepository {
   ReviewRepository(this._storage)
     : _store = ValueStore<List<Review>>(
@@ -18,7 +18,7 @@ class ReviewRepository {
   final StorageService _storage;
   final ValueStore<List<Review>> _store;
 
-  /// Отзывы от новых к старым.
+  /// newest first
   List<Review> get reviews => List.unmodifiable(_store.value);
 
   Stream<List<Review>> get stream => _store.stream;
@@ -36,7 +36,7 @@ class ReviewRepository {
   List<Review> byAuthor(String authorId) =>
       _store.value.where((review) => review.authorId == authorId).toList();
 
-  /// Группировка отзывов по товару — используется поиском и карточками.
+  /// groups reviews by item
   static Map<String, List<Review>> groupByItem(List<Review> reviews) {
     final map = <String, List<Review>>{};
     for (final review in reviews) {
@@ -45,7 +45,7 @@ class ReviewRepository {
     return map;
   }
 
-  /// Количество и средняя оценка по каждому товару.
+  /// count and average per item
   static Map<String, ReviewStats> statsByItem(List<Review> reviews) {
     final totals = <String, (int count, int sum)>{};
     for (final review in reviews) {

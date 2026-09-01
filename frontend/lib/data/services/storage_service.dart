@@ -3,10 +3,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Обёртка над `shared_preferences`.
-///
-/// Реального backend нет, поэтому репозитории сохраняют своё состояние здесь —
-/// данные переживают перезапуск приложения во время демонстрации.
+/// local storage wrapper; repositories persist their state here
 class StorageService {
   StorageService(this._prefs);
 
@@ -27,7 +24,7 @@ class StorageService {
           .map((entry) => fromJson(entry as Map<String, dynamic>))
           .toList();
     } catch (_) {
-      // Данные из прошлой версии схемы — откатываемся на исходный набор.
+      // stale schema, fall back to the seed data
       return fallback;
     }
   }
@@ -51,7 +48,7 @@ class StorageService {
     }
   }
 
-  /// Полностью очищает состояние прототипа.
+  /// wipes the prototype state
   Future<void> clearAll() async {
     final keys = _prefs.getKeys().where((key) => key.startsWith(_prefix));
     for (final key in keys) {

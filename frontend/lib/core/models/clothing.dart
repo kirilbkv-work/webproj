@@ -1,5 +1,4 @@
-/// Тип одежды. Используется как атрибут товара, критерий поиска
-/// и как «любимый тип» в профиле покупателя.
+/// item type, also a search criterion and a profile preference
 enum ClothingType {
   sportswear('sportswear', 'Sportswear'),
   workwear('workwear', 'Workwear'),
@@ -9,7 +8,7 @@ enum ClothingType {
 
   const ClothingType(this.wireName, this.label);
 
-  /// Значение для сериализации — не зависит от имени константы Dart.
+  /// stable value for serialization
   final String wireName;
   final String label;
 
@@ -19,7 +18,7 @@ enum ClothingType {
   );
 }
 
-/// Размер одежды. Порядок констант задаёт порядок отображения.
+/// declaration order drives display order
 enum ClothingSize {
   xs('XS'),
   s('S'),

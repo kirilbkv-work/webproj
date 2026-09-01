@@ -7,12 +7,11 @@ import '../../core/models/models.dart';
 import '../../core/theme/app_palette.dart';
 import '../shared/widgets/ui_kit.dart';
 
-/// Телефон в свободном международном формате: «+1 555 010 0200».
+/// loose international phone format
 final _phonePattern = RegExp(r'^[+()\d][\d\s()-]{6,}$');
 final _emailPattern = RegExp(r'^[\w.+-]+@[\w-]+(\.[\w-]+)+$');
 
-/// Регистрация. По заданию покупатель сразу заполняет весь профиль:
-/// имя, контакты, любимые типы одежды и учётные данные.
+/// registration; the assignment asks for the full profile up front
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -33,14 +32,14 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final _favoriteTypes = <ClothingType>{};
 
-  /// Ошибка локальной валидации формы (в отличие от ошибки репозитория).
+  /// local validation error, not the repository one
   String? _localError;
   bool _favoritesTouched = false;
 
   @override
   void initState() {
     super.initState();
-    // Ошибка могла остаться от прошлой попытки — открываем форму чистой.
+    // drop an error left over from a previous attempt
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         context.read<AuthBloc>().add(const AuthErrorCleared());
@@ -114,11 +113,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Одна колонка на узком экране — порог общий для всего прототипа.
+        // single column on narrow screens
         final narrow = constraints.maxWidth < 760;
 
         return BlocConsumer<AuthBloc, AuthState>(
-          // Нужен именно переход «гость → авторизован».
+          // only the guest to signed-in transition should navigate
           listenWhen: (previous, current) =>
               !previous.isAuthenticated && current.isAuthenticated,
           listener: (context, state) => context.go('/catalog'),
@@ -396,7 +395,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-/// Раздел формы с подзаголовком.
+/// form section with a heading
 class _Section extends StatelessWidget {
   const _Section({required this.title, required this.child});
 
@@ -416,7 +415,7 @@ class _Section extends StatelessWidget {
   }
 }
 
-/// Ячейка сетки полей; [wide] занимает обе колонки.
+/// grid cell; [wide] spans both columns
 class _GridCell {
   const _GridCell({required this.child, this.wide = false});
 
@@ -424,7 +423,7 @@ class _GridCell {
   final bool wide;
 }
 
-/// Двухколоночная сетка полей, сворачивающаяся в одну колонку.
+/// two-column field grid, one column when narrow
 class _FormGrid extends StatelessWidget {
   const _FormGrid({required this.narrow, required this.cells});
 
@@ -455,7 +454,7 @@ class _FormGrid extends StatelessWidget {
   }
 }
 
-/// Подпись над полем ввода — единый вид для всех полей формы.
+/// label above an input
 class _Field extends StatelessWidget {
   const _Field({required this.label, required this.child});
 

@@ -9,8 +9,7 @@ import '../../core/theme/app_theme.dart';
 import '../../data/repositories/demo_data_service.dart';
 import 'widgets/app_snack.dart';
 
-/// Оболочка приложения: шапка с навигацией, область страниц, подвал
-/// и единая точка показа уведомлений.
+/// app shell: masthead, page area, footer and notifications
 class AppShell extends StatelessWidget {
   const AppShell({super.key, required this.child});
 

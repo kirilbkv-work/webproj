@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-/// Результат операции «backend»: успех либо текст ошибки для показа
-/// пользователю.
+/// outcome of a repository call
 class Result extends Equatable {
   const Result.success() : error = null;
 

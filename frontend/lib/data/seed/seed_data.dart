@@ -1,10 +1,8 @@
 import '../../core/models/models.dart';
 
-/// Предопределённый набор данных прототипа.
-///
-/// Задание требует минимум 10 товаров, созданных заранее — здесь их 16.
+/// predefined data set; the assignment asks for at least 10 items
 abstract final class SeedData {
-  /// Каталог товаров.
+  /// catalog items
   static List<Item> get items => [
     Item(
       id: 'itm-01',
@@ -321,8 +319,7 @@ abstract final class SeedData {
     ),
   ];
 
-  /// Демонстрационный аккаунт: логин `customer`, пароль `customer`.
-  /// Остальные пользователи нужны как авторы отзывов.
+  /// demo account is customer / customer; the rest author reviews
   static List<UserProfile> get users => [
     UserProfile(
       id: 'usr-01',
@@ -390,7 +387,7 @@ abstract final class SeedData {
     ),
   ];
 
-  /// Отзывы оставлены покупателями, которые заказывали соответствующий товар.
+  /// reviews from customers who ordered the item
   static List<Review> get reviews => [
     Review(
       id: 'rev-01',
@@ -538,7 +535,7 @@ abstract final class SeedData {
     ),
   ];
 
-  /// Стартовые заказы демонстрационного аккаунта — по одному на каждый статус.
+  /// starting orders, one per status
   static List<Order> get orders => [
     Order(
       id: 'ord-01',

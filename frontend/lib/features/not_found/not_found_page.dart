@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../shared/widgets/ui_kit.dart';
 
-/// Страница для неизвестных адресов.
+/// shown for unknown routes
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});
 

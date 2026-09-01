@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_palette.dart';
 
-/// Наглядное отображение оценки: пять звёзд с частичным заполнением
-/// плюс числовое значение — символы и текст одновременно.
+/// rating as five stars plus the numeric value
 class RatingStars extends StatelessWidget {
   const RatingStars({
     super.key,
@@ -13,10 +12,10 @@ class RatingStars extends StatelessWidget {
     this.starSize = 16,
   });
 
-  /// Средняя оценка от 0 до 5.
+  /// average rating, 0 to 5
   final double value;
 
-  /// Количество отзывов, участвующих в оценке.
+  /// number of reviews behind the average
   final int count;
   final bool showValue;
   final double starSize;

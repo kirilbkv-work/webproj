@@ -1,13 +1,8 @@
 import '../models/models.dart';
 
-/// Поиск и сортировка каталога.
-///
-/// Вынесены в чистые функции: не зависят ни от репозиториев, ни от BLoC,
-/// поэтому легко тестируются и переиспользуются.
+/// catalog search and sorting as pure functions
 abstract final class ItemSearch {
-  /// Применяет активный критерий и сортировку к набору товаров.
-  ///
-  /// [statsByItem] нужен для критерия «отзывы» и сортировки по рейтингу.
+  /// applies the active criterion and the sort order
   static List<Item> apply({
     required List<Item> items,
     required SearchQuery query,
@@ -44,7 +39,7 @@ abstract final class ItemSearch {
 
       SearchCriterion.type => query.type == null || item.type == query.type,
 
-      // Ищем по всем размерам, доступным для резервирования.
+      // matches any size offered on reservation
       SearchCriterion.size =>
         query.size == null || item.availableSizes.contains(query.size),
 

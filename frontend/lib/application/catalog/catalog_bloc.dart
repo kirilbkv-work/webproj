@@ -11,10 +11,7 @@ import '../../data/repositories/review_repository.dart';
 part 'catalog_event.dart';
 part 'catalog_state.dart';
 
-/// Каталог и поиск.
-///
-/// Слушает сразу два репозитория: товары и отзывы — потому что критерий
-/// «user reviews» и сортировка по рейтингу зависят от отзывов.
+/// catalog and search; watches items and reviews
 class CatalogBloc extends Bloc<CatalogEvent, CatalogState> {
   CatalogBloc({
     required CatalogRepository catalog,
@@ -81,7 +78,7 @@ class CatalogBloc extends Bloc<CatalogEvent, CatalogState> {
 
   CatalogState _recompute(CatalogState base) => _build(_catalog, _reviews, base);
 
-  /// Пересчитывает выдачу из текущих данных репозиториев и запроса.
+  /// recomputes results from the repositories and the query
   static CatalogState _build(
     CatalogRepository catalog,
     ReviewRepository reviewRepository,

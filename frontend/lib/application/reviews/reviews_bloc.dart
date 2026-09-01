@@ -10,9 +10,7 @@ import '../../data/repositories/review_repository.dart';
 part 'reviews_event.dart';
 part 'reviews_state.dart';
 
-/// Страница со всеми отзывами покупателей.
-///
-/// Доступна без авторизации — задание разрешает читать чужие отзывы всем.
+/// all customer reviews; open to guests
 class ReviewsBloc extends Bloc<ReviewsEvent, ReviewsState> {
   ReviewsBloc({
     required ReviewRepository reviews,

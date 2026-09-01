@@ -5,7 +5,7 @@ import '../../../core/theme/app_palette.dart';
 import '../../shared/widgets/star_input.dart';
 import '../../shared/widgets/ui_kit.dart';
 
-/// Результат диалога оценки заказа.
+/// result of the rating dialog
 class RatingResult {
   const RatingResult({required this.rating, required this.comment});
 
@@ -13,8 +13,7 @@ class RatingResult {
   final String comment;
 }
 
-/// Диалог выставления оценки. Доступен только для собственных заказов
-/// в статусе «arrived»; оценка публикуется как отзыв о товаре.
+/// rates an arrived order; the rating is published as a review
 class RateOrderDialog extends StatefulWidget {
   const RateOrderDialog({
     super.key,
@@ -24,7 +23,7 @@ class RateOrderDialog extends StatefulWidget {
 
   final CartLine line;
 
-  /// Текст ранее оставленного отзыва, если оценка уже выставлялась.
+  /// text of an existing review, if any
   final String initialComment;
 
   static Future<RatingResult?> show(

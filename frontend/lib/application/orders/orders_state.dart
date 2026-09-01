@@ -8,17 +8,16 @@ class OrdersState extends Equatable {
     this.message,
   });
 
-  /// Все зарезервированные товары текущего покупателя.
+  /// every reserved item of the current customer
   final List<CartLine> lines;
 
-  /// Общая стоимость и разбивка по статусам.
+  /// total price and per-status breakdown
   final CartTotals totals;
 
-  /// Активный фильтр по статусу, `null` — все заказы.
+  /// null means every status
   final OrderStatus? filter;
 
-  /// Одноразовое сообщение для SnackBar (в том числе уведомление
-  /// о резервировании, которого требует задание).
+  /// one-shot snack bar message, including the reservation notice
   final AppMessage? message;
 
   bool get isEmpty => lines.isEmpty;

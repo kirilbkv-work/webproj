@@ -11,7 +11,7 @@ const Map<int, String> _words = {
   5: 'Excellent',
 };
 
-/// Интерактивный выбор оценки заказа: звёзды плюс словесная подпись.
+/// interactive rating picker with a word label
 class StarInput extends StatefulWidget {
   const StarInput({super.key, required this.value, required this.onChanged});
 

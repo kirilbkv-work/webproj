@@ -14,7 +14,7 @@ import '../data/repositories/order_repository.dart';
 import '../data/repositories/review_repository.dart';
 import 'router.dart';
 
-/// Корень приложения: репозитории, глобальные BLoC и маршрутизация.
+/// app root: repositories, global blocs and routing
 class DigitalClothingStoreApp extends StatefulWidget {
   const DigitalClothingStoreApp({
     super.key,

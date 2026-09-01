@@ -11,11 +11,7 @@ import '../../data/repositories/order_repository.dart';
 part 'orders_event.dart';
 part 'orders_state.dart';
 
-/// Order Cart и управление заказами.
-///
-/// Слушает заказы, каталог и сессию: состав корзины зависит от всех трёх.
-/// Правила по статусам проверяет [OrderRepository], поэтому BLoC только
-/// транслирует события и превращает результат в сообщение пользователю.
+/// order cart; status rules live in OrderRepository
 class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   OrdersBloc({
     required OrderRepository orders,

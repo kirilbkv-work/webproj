@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Дополнительные цвета дизайн-системы, которых нет в [ColorScheme].
-///
-/// Подключается как [ThemeExtension], поэтому доступна из любого виджета
-/// через `context.palette`.
+/// extra design tokens missing from [ColorScheme]
 @immutable
 class AppPalette extends ThemeExtension<AppPalette> {
   const AppPalette({
@@ -138,7 +135,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
 }
 
 extension AppPaletteContext on BuildContext {
-  /// Цвета дизайн-системы приложения.
+  /// design tokens of the app
   AppPalette get palette =>
       Theme.of(this).extension<AppPalette>() ?? AppPalette.light;
 

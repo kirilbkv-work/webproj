@@ -6,7 +6,7 @@ import '../seed/seed_data.dart';
 import '../services/storage_service.dart';
 import '../services/value_store.dart';
 
-/// Список зарегистрированных покупателей вместе с текущей сессией.
+/// registered customers plus the current session
 class AuthData extends Equatable {
   const AuthData({required this.users, required this.currentUserId});
 
@@ -35,10 +35,7 @@ class AuthData extends Equatable {
   List<Object?> get props => [users, currentUserId];
 }
 
-/// Симуляция аутентификации.
-///
-/// Каталог и отзывы доступны без входа; резервирование, корзина и профиль
-/// требуют авторизации.
+/// simulated authentication
 class AuthRepository {
   AuthRepository(this._storage)
     : _store = ValueStore<AuthData>(

@@ -2,8 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'clothing.dart';
 
-/// Критерии поиска. Задание требует применять их **по отдельности**,
-/// поэтому запрос всегда содержит ровно один активный критерий.
+/// search criteria, applied one at a time
 enum SearchCriterion {
   name('Name'),
   type('Type'),
@@ -18,7 +17,7 @@ enum SearchCriterion {
   final String label;
 }
 
-/// Порядок сортировки выдачи.
+/// result ordering
 enum SortOption {
   relevance('Default order'),
   priceAsc('Price: low to high'),
@@ -31,8 +30,7 @@ enum SortOption {
   final String label;
 }
 
-/// Значения всех критериев поиска. Активным считается только тот,
-/// который выбран в [criterion].
+/// all criterion values; only [criterion] is active
 class SearchQuery extends Equatable {
   const SearchQuery({
     this.criterion = SearchCriterion.name,
@@ -60,7 +58,7 @@ class SearchQuery extends Equatable {
   final String reviewText;
   final double? minRating;
 
-  /// Заполнено ли значение выбранного критерия.
+  /// whether the active criterion has a value
   bool get isActive => switch (criterion) {
     SearchCriterion.name => name.trim().isNotEmpty,
     SearchCriterion.type => type != null,
@@ -106,7 +104,7 @@ class SearchQuery extends Equatable {
     );
   }
 
-  /// Сбрасывает все значения, сохраняя выбранный критерий.
+  /// clears the values, keeps the criterion
   SearchQuery cleared() => SearchQuery(criterion: criterion);
 
   @override

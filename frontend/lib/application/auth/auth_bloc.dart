@@ -9,7 +9,7 @@ import '../../data/repositories/auth_repository.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-/// Управляет сессией покупателя: вход, регистрация, выход и правка профиля.
+/// sign in, register, sign out and profile edits
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required AuthRepository repository})
     : _repository = repository,

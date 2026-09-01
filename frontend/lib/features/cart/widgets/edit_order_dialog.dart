@@ -4,10 +4,7 @@ import '../../../core/models/models.dart';
 import '../../../core/theme/app_palette.dart';
 import '../../shared/widgets/ui_kit.dart';
 
-/// Диалог изменения данных заказа.
-///
-/// Доступен только для статусов «in progress» и «canceled».
-/// Возвращает новый [OrderDraft] либо `null`, если изменения отменены.
+/// edits an order; returns a new [OrderDraft] or null
 class EditOrderDialog extends StatefulWidget {
   const EditOrderDialog({super.key, required this.line});
 

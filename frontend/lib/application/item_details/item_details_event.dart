@@ -7,7 +7,7 @@ sealed class ItemDetailsEvent extends Equatable {
   List<Object?> get props => const [];
 }
 
-/// Внутреннее событие: изменились каталог, отзывы, заказы или сессия.
+/// internal: catalog, reviews, orders or session changed
 class _ItemDetailsDataChanged extends ItemDetailsEvent {
   const _ItemDetailsDataChanged();
 }

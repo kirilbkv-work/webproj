@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-/// Отзыв покупателя, который заказывал товар.
-///
-/// Создаётся, когда пользователь оценивает свой заказ в статусе `arrived`.
+/// review from a customer who ordered the item
 class Review extends Equatable {
   const Review({
     required this.id,
@@ -20,12 +18,12 @@ class Review extends Equatable {
   final String authorId;
   final String authorName;
 
-  /// Оценка от 1 до 5.
+  /// 1 to 5
   final int rating;
   final String comment;
   final DateTime createdAt;
 
-  /// Заказ, из которого получен отзыв.
+  /// order this review came from
   final String? orderId;
 
   Review copyWith({int? rating, String? comment}) => Review(
@@ -74,7 +72,7 @@ class Review extends Equatable {
   ];
 }
 
-/// Количество отзывов и средняя оценка по одному товару.
+/// review count and average for one item
 class ReviewStats extends Equatable {
   const ReviewStats({required this.count, required this.average});
 

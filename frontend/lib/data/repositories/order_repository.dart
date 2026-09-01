@@ -7,11 +7,7 @@ import 'auth_repository.dart';
 import 'catalog_repository.dart';
 import 'review_repository.dart';
 
-/// Симуляция backend-логики заказов: резервирование, чтение корзины,
-/// изменение, удаление и выставление оценки.
-///
-/// Правила, заданные заданием (что разрешено в каком статусе), живут здесь,
-/// поэтому BLoC остаётся тонким: он только транслирует события в вызовы.
+/// simulated order backend; status rules live here so blocs stay thin
 class OrderRepository {
   OrderRepository({
     required StorageService storage,
@@ -47,7 +43,7 @@ class OrderRepository {
     return null;
   }
 
-  /// Заказы текущего пользователя, свежие сверху.
+  /// current user's orders, newest first
   List<Order> get myOrders {
     final user = _auth.currentUser;
     if (user == null) return const [];
@@ -57,7 +53,7 @@ class OrderRepository {
   List<Order> myOrdersForItem(String itemId) =>
       myOrders.where((order) => order.itemId == itemId).toList();
 
-  /// Содержимое Order Cart с раскрытыми данными товаров.
+  /// cart lines with item data resolved
   List<CartLine> get cart {
     final lines = <CartLine>[];
     for (final order in myOrders) {
@@ -67,8 +63,7 @@ class OrderRepository {
     return lines;
   }
 
-  /// Резервирование товара. Товар попадает в Order Cart со статусом
-  /// «in progress», покупатель получает уведомление на стороне UI.
+  /// reserves an item as in progress
   Result reserve(String itemId, OrderDraft draft) {
     final user = _auth.currentUser;
     if (user == null) {
@@ -95,7 +90,7 @@ class OrderRepository {
     return const Result.success();
   }
 
-  /// Изменение данных заказа — только в статусах «in progress» и «canceled».
+  /// in progress and canceled orders only
   Result update(String orderId, OrderDraft draft) {
     final order = byId(orderId);
     if (order == null) return const Result.failure('Order not found.');
@@ -122,7 +117,7 @@ class OrderRepository {
     return const Result.success();
   }
 
-  /// Удаление заказа из корзины — только в статусе «arrived».
+  /// arrived orders only
   Result remove(String orderId) {
     final order = byId(orderId);
     if (order == null) return const Result.failure('Order not found.');
@@ -135,8 +130,7 @@ class OrderRepository {
     return const Result.success();
   }
 
-  /// Оценка заказа. Разрешена только для собственных заказов в статусе
-  /// «arrived»; оценка публикуется как отзыв о товаре.
+  /// rates an arrived order and publishes it as a review
   Result rate(String orderId, int rating, String comment) {
     final user = _auth.currentUser;
     final order = byId(orderId);
@@ -179,8 +173,7 @@ class OrderRepository {
     return const Result.success();
   }
 
-  /// Демонстрационный переход статуса: позволяет показать сценарий
-  /// «заказ приехал» без реального backend.
+  /// prototype-only status change
   Result changeStatus(String orderId, OrderStatus status) {
     if (byId(orderId) == null) return const Result.failure('Order not found.');
     _commit([

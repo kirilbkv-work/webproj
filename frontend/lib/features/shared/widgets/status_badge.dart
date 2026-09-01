@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/models/models.dart';
 import '../../../core/theme/app_palette.dart';
 
-/// Статус заказа в виде цветной метки.
+/// order status pill
 class StatusBadge extends StatelessWidget {
   const StatusBadge({super.key, required this.status});
 

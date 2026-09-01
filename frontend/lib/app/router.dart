@@ -19,16 +19,13 @@ import '../features/reviews/reviews_page.dart';
 import '../features/shared/app_shell.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Маршруты, требующие входа в систему.
+/// routes that require an account
 const Set<String> _protectedRoutes = {'/cart', '/profile'};
 
-/// Маршруты, недоступные уже авторизованному покупателю.
+/// routes hidden from signed-in customers
 const Set<String> _guestOnlyRoutes = {'/login', '/register'};
 
-/// Собирает маршрутизацию приложения.
-///
-/// Проверка доступа вынесена в `redirect` — это прямой аналог
-/// Angular-гардов `authGuard` / `guestGuard`.
+/// builds the router; access checks live in redirect
 GoRouter createRouter({
   required AuthRepository auth,
   required CatalogRepository catalog,
@@ -65,8 +62,7 @@ GoRouter createRouter({
             path: '/catalog/:id',
             builder: (context, state) {
               final id = state.pathParameters['id'] ?? '';
-              // Свой BLoC на время жизни страницы — он держит подписки
-              // на каталог, отзывы, заказы и сессию для одного товара.
+              // per-page bloc, scoped to this item
               return BlocProvider(
                 key: ValueKey(id),
                 create: (_) => ItemDetailsBloc(
@@ -104,8 +100,7 @@ GoRouter createRouter({
   );
 }
 
-/// Мостик между потоком сессии и `refreshListenable` go_router:
-/// после входа или выхода маршрутизатор заново применяет `redirect`.
+/// re-runs redirect when the session changes
 class _AuthRefreshNotifier extends ChangeNotifier {
   _AuthRefreshNotifier(Stream<AuthData> stream) {
     _subscription = stream.listen((_) => notifyListeners());
